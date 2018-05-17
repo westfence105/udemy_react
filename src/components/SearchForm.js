@@ -2,20 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class SearchForm extends Component {
-    constructor( props ){
-        super( props );
-
-        this.state = {
-            place: "",
-        };
-    }
-
     render(){
         return (
             <form className="search-form" onSubmit={ e => this.handleSubmit( e ) }>
-                <input type="text" value={this.state.place}
+                <input type="text" value={this.props.place}
                        className="place-input" size="30"
-                       onChange={ e => this.handlePlaceChange( e.target.value )}/>
+                       value={ this.props.place }
+                       onChange={ e => this.props.onPlaceChange( e.target.value )}/>
                 <input type="submit" value="検索" className="submit-button" />
             </form>
         );
@@ -23,16 +16,14 @@ class SearchForm extends Component {
 
     handleSubmit( e ){
         e.preventDefault(); //submitのdefaultの動きをキャンセル
-        this.props.onSubmit( this.state.place );
-    }
-
-    handlePlaceChange( place ){
-        this.setState({ place });
+        this.props.onSubmit();
     }
 }
 
 SearchForm.propTypes = {
+    place: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    onPlaceChange: PropTypes.func.isRequired,
 };
 
 export default SearchForm;

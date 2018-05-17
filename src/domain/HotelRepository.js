@@ -13,7 +13,7 @@ export const searchHotelByLocation = location => {
                 };
     return Rakuten.Travel.simpleHotelSearch(params)
                          .then( (result) => {
-                             console.log(result);
+                        //     console.log(result);
                              return result.data.hotels.map( (hotel) => {
                                  const info = hotel.hotel[0].hotelBasicInfo;
                                  const minCharge = info.hotelMinCharge;
